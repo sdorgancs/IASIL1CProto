@@ -1,0 +1,18 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.cssi.pdap.dpi.plugins;
+
+/**
+ *
+ * @author sdorgan
+ */
+public enum DataProgressStatus {
+    NONE,
+    INITIALIZED,
+    IN_PROGRESS,
+    IN_ERROR,
+    FINISHED,
+}
