@@ -10,7 +10,8 @@ package com.cssi.pdap.dpi.plugins;
  * @author sdorgan
  */
 public interface IFunctionnalBlockPlugin {
-    void init(IPluginConfig init);
-    void close();
-    
+	void init(IPluginConfig init);
+
+	void close();
+
 }

@@ -9,11 +9,12 @@ package com.cssi.iasil1cpop.plugins.errors;
  *
  * @author sdorgan
  */
-public class AuxiliaryDataMissingError extends Error{
-    String dataIdentifier;
-    public AuxiliaryDataMissingError(ErrorSeverity criticity, String description, String dataIdentifier) {
-        super(criticity, description);
-        this.dataIdentifier = dataIdentifier;
-    }
-    
+public class AuxiliaryDataMissingError extends Error {
+	String dataIdentifier;
+
+	public AuxiliaryDataMissingError(ErrorSeverity criticity, String description, String dataIdentifier) {
+		super(criticity, description);
+		this.dataIdentifier = dataIdentifier;
+	}
+
 }

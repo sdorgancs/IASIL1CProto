@@ -9,13 +9,13 @@ package com.cssi.iasil1cpop.plugins.errors;
  *
  * @author sdorgan
  */
-public class AuxiliaryDataIntegrityError extends AuxiliaryDataMissingError{
-    String fieldIdentifier;
+public class AuxiliaryDataIntegrityError extends AuxiliaryDataMissingError {
+	String fieldIdentifier;
 
-    public AuxiliaryDataIntegrityError(ErrorSeverity criticity, String description, String dataIdentifier, String fieldIdentifier) {
-        super(criticity, description, dataIdentifier);
-        this.fieldIdentifier = fieldIdentifier;
-    }
-    
-    
+	public AuxiliaryDataIntegrityError(ErrorSeverity criticity, String description, String dataIdentifier,
+			String fieldIdentifier) {
+		super(criticity, description, dataIdentifier);
+		this.fieldIdentifier = fieldIdentifier;
+	}
+
 }

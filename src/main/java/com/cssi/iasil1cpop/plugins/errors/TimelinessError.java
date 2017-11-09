@@ -9,20 +9,17 @@ package com.cssi.iasil1cpop.plugins.errors;
  *
  * @author sdorgan
  */
-public class TimelinessError extends Error{
-    String plugin;
-    long expectedDuration;
-    long effectiveDuration;
-    public TimelinessError(ErrorSeverity criticity, 
-            String description,
-            String plugin,
-            long expectedDuration,
-            long effectiveDuration
-    ) {
-        super(criticity, description);
-        this.plugin = plugin;
-        this.expectedDuration = expectedDuration;
-        this.effectiveDuration = effectiveDuration;
-    }
-    
+public class TimelinessError extends Error {
+	String plugin;
+	long expectedDuration;
+	long effectiveDuration;
+
+	public TimelinessError(ErrorSeverity criticity, String description, String plugin, long expectedDuration,
+			long effectiveDuration) {
+		super(criticity, description);
+		this.plugin = plugin;
+		this.expectedDuration = expectedDuration;
+		this.effectiveDuration = effectiveDuration;
+	}
+
 }

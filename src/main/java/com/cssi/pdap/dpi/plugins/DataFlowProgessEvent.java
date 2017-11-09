@@ -9,8 +9,8 @@ package com.cssi.pdap.dpi.plugins;
  *
  * @author sdorgan
  */
-public class DataFlowProgessEvent implements IDataFlowEvent{
-    public DataFlowProgessEvent(String dataType, String dataInfo, DataProgressStatus status, int percentProgress){
-        
-    }
+public class DataFlowProgessEvent implements IDataFlowEvent {
+	public DataFlowProgessEvent(String dataType, String dataInfo, DataProgressStatus status, int percentProgress) {
+
+	}
 }

@@ -12,6 +12,7 @@ import java.util.List;
  * @author sdorgan
  */
 public interface IAuxiliaryDataManager {
-    void ingestParams(ITupleApi params);
-    List<ITupleApi> queryParams(ITupleApi query);
+	void ingestParams(ITupleApi params);
+
+	List<ITupleApi> queryParams(ITupleApi query);
 }

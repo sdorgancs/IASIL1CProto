@@ -12,11 +12,16 @@ import java.util.Properties;
  * @author sdorgan
  */
 public interface IPluginConfig {
-    IAuxiliaryDataManager getAuxiliaryDataManager();
-    IHistoricalDataManager getHistoricalDataManager();
-    ILoggerHelper getILoggerHelper();
-    ITracerHelper getTracerHelper();
-    IBreakpointHelper getBreakpointHelper();
-    Properties getProperties();
-    
+	IAuxiliaryDataManager getAuxiliaryDataManager();
+
+	IHistoricalDataManager getHistoricalDataManager();
+
+	ILoggerHelper getILoggerHelper();
+
+	ITracerHelper getTracerHelper();
+
+	IBreakpointHelper getBreakpointHelper();
+
+	Properties getProperties();
+
 }

@@ -7,10 +7,11 @@ package com.cssi.iasil1cpop.algorithms;
 
 /**
  * Base interface defining algorithms
+ * 
  * @author sdorgan
- * @param <Input> 
+ * @param <Input>
  * @param <Output>
  */
-public interface Algorithm <Input, Output>{
-    Output call(Input input);
+public interface Algorithm<Input, Output> {
+	Output call(Input input);
 }

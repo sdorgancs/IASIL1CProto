@@ -12,16 +12,26 @@ import java.util.List;
  * @author sdorgan
  */
 public interface ITupleApi {
-     void addField(String fieldName, Object fieldValue);
-    boolean contains(String field);
-    int fieldIndex(String field);
-    Object find(String pattern);
-    Field getField(String name);
-    Fields getFields(String name);
-    Object getValue();
-    Object getValueByField(String fieldName);
-    List<Object> getValues();
-    List<Object> select(Fields fields);
-    int size();
-    
+	void addField(String fieldName, Object fieldValue);
+
+	boolean contains(String field);
+
+	int fieldIndex(String field);
+
+	Object find(String pattern);
+
+	Field getField(String name);
+
+	Fields getFields(String name);
+
+	Object getValue();
+
+	Object getValueByField(String fieldName);
+
+	List<Object> getValues();
+
+	List<Object> select(Fields fields);
+
+	int size();
+
 }

@@ -26,7 +26,7 @@ public class BaseAlgorithmsTest {
 			ComplexArray spkShifted = algo.make_hermitian(spk, false);
 
 			ComplexArray expectedSym = new ComplexArray(nfft);
-			
+
 			expectedSym.put(0, new Complex(0d, 0d));
 			expectedSym.put(1, new Complex(0d, -0d));
 			expectedSym.put(2, new Complex(0d, -0d));
@@ -78,7 +78,6 @@ public class BaseAlgorithmsTest {
 			expectedSym.put(8, new Complex(0d, 0d));
 			expectedSym.put(9, new Complex(0d, 0d));
 			expectedSym.put(10, new Complex(0d, 0d));
-			
 
 			Assert.assertArrayEquals(expectedSym.getData(), spkShifted.getData(), 10E-10);
 		}
@@ -114,7 +113,7 @@ public class BaseAlgorithmsTest {
 	public void TestFft() {
 		BaseAlgorithms algo = new BaseAlgorithms();
 		{
-			
+
 			int nfft = 8;
 			ComplexArray spk = new ComplexArray(nfft);
 			spk.put(0, new Complex(0d, 0d));
@@ -126,7 +125,7 @@ public class BaseAlgorithmsTest {
 			spk.put(5, new Complex(0d, 2d));
 			spk.put(6, new Complex(0d, 3d));
 			spk.put(7, new Complex(0d, 0d));
-			
+
 			ComplexArray ife = algo.fft(spk.deepCopy());
 
 			ComplexArray expectedSym = algo.ifft(ife.deepCopy());
@@ -134,7 +133,7 @@ public class BaseAlgorithmsTest {
 			Assert.assertArrayEquals(expectedSym.getData(), spk.getData(), 10E-10);
 		}
 		{
-			
+
 			int nfft = 9;
 			ComplexArray spk = new ComplexArray(nfft);
 
@@ -145,7 +144,7 @@ public class BaseAlgorithmsTest {
 			Assert.assertArrayEquals(expectedSym.getData(), spk.getData(), 10E-10);
 		}
 		{
-			
+
 			int nfft = 9;
 			ComplexArray spk = new ComplexArray(nfft);
 			spk.put(0, new Complex(15, 0));
@@ -162,26 +161,25 @@ public class BaseAlgorithmsTest {
 
 			ComplexArray ife = algo.fft(spk.deepCopy());
 
-
 			ComplexArray expectedSym = algo.ifft(ife.deepCopy());
 
 			Assert.assertArrayEquals(expectedSym.getData(), spk.getData(), 10E-10);
 		}
 	}
-	
+
 	@Test
-	public void TestFftshiftEvent(){
-		
+	public void TestFftshiftEvent() {
+
 		int nfft = 6;
 		ComplexArray spk = new ComplexArray(nfft);
-		
-		for(int i = 0; i<spk.length(); i++){
-			spk.put(i, new Complex(i+1));
+
+		for (int i = 0; i < spk.length(); i++) {
+			spk.put(i, new Complex(i + 1));
 		}
 		BaseAlgorithms algo = new BaseAlgorithms();
 		ComplexArray spkRef = spk.deepCopy();
 		algo.fftshift(spk);
-		
+
 		ComplexArray expected = new ComplexArray(nfft);
 		expected.put(0, new Complex(4));
 		expected.put(1, new Complex(5));
@@ -189,14 +187,14 @@ public class BaseAlgorithmsTest {
 		expected.put(3, new Complex(1));
 		expected.put(4, new Complex(2));
 		expected.put(5, new Complex(3));
-		
+
 		Assert.assertArrayEquals(expected.getData(), spk.getData(), 10E-10);
-		
+
 		algo.ifftshift(spk);
 		Assert.assertArrayEquals(spkRef.getData(), spk.getData(), 10E-10);
 
 	}
-	
+
 	@Test
 	public void TestFftshiftOdd() {
 		{
@@ -219,12 +217,11 @@ public class BaseAlgorithmsTest {
 			expected.put(5, new Complex(3));
 			expected.put(6, new Complex(4));
 
-
 			Assert.assertArrayEquals(expected.getData(), spk.getData(), 10E-10);
 			algo.ifftshift(spk);
-			
+
 			Assert.assertArrayEquals(spkRef.getData(), spk.getData(), 10E-10);
-			
+
 		}
 		{
 			int nfft = 9;
@@ -246,7 +243,6 @@ public class BaseAlgorithmsTest {
 			expected.put(6, new Complex(3));
 			expected.put(7, new Complex(4));
 			expected.put(8, new Complex(5));
-
 
 			Assert.assertArrayEquals(expected.getData(), spk.getData(), 10E-10);
 		}

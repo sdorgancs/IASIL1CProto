@@ -12,7 +12,7 @@ import org.hipparchus.util.Pair;
  *
  * @author sdorgan
  */
-public interface IFunctionPlugin extends IFunctionnalBlockPlugin{
-    LinkedList<Pair<IDataFlowEvent, ITupleApi>> execute(ITupleApi input);
-    
+public interface IFunctionPlugin extends IFunctionnalBlockPlugin {
+	LinkedList<Pair<IDataFlowEvent, ITupleApi>> execute(ITupleApi input);
+
 }

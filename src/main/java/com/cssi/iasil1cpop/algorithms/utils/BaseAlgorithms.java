@@ -6,76 +6,79 @@ import edu.emory.mathcs.jtransforms.fft.DoubleFFT_1D;
 
 public class BaseAlgorithms {
 	/**
-	 * Implements in place fftshift on a complex spectrum (place zero frequency in the center)
+	 * Implements in place fftshift on a complex spectrum (place zero frequency
+	 * in the center)
 	 *
-	 * @param spk a spectrum
-	 * @param conjugate if true conjugate negative frequency spectrum values
+	 * @param spk
+	 *            a spectrum
+	 * @param conjugate
+	 *            if true conjugate negative frequency spectrum values
 	 * @return transformed spk to facilitate algorithms pipelining
 	 */
 	public ComplexArray fftshift(ComplexArray spk) {
 		int middle = spk.length() / 2;
 
-		if ((spk.length() % 2) == 0){//even	
+		if ((spk.length() % 2) == 0) {// even
 			for (int i = 0; i < middle; i++) {
-				spk.swap(i, middle+i);
+				spk.swap(i, middle + i);
 			}
-		}
-		else{//odd
-			
+		} else {// odd
+
 			Complex cm = spk.get(middle);
 			for (int i = 0; i < middle; i++) {
 				Complex ci = spk.get(i);
-				Complex cm1i = spk.get(middle+1+i);
+				Complex cm1i = spk.get(middle + 1 + i);
 				spk.put(i, cm1i);
-				spk.put(middle+i, ci);
+				spk.put(middle + i, ci);
 			}
-			spk.put(spk.length()-1, cm);
+			spk.put(spk.length() - 1, cm);
 		}
-		
+
 		return spk;
 	}
-	
-	
+
 	/**
-	 * Implements in place ifftshift on a complex spectrum (place zero frequency in the center)
+	 * Implements in place ifftshift on a complex spectrum (place zero frequency
+	 * in the center)
 	 *
-	 * @param spk a spectrum
-	 * @param conjugate if true conjugate negative frequency spectrum values
+	 * @param spk
+	 *            a spectrum
+	 * @param conjugate
+	 *            if true conjugate negative frequency spectrum values
 	 * @return transformed spk to facilitate algorithms pipelining
 	 */
 	public ComplexArray ifftshift(ComplexArray spk) {
 		int middle = spk.length() / 2;
 
-		if ((spk.length() % 2) == 0){//even	
+		if ((spk.length() % 2) == 0) {// even
 			for (int i = 0; i < middle; i++) {
-				spk.swap(i, middle+i);
+				spk.swap(i, middle + i);
 			}
-		}
-		else{//odd
+		} else {// odd
 			Complex cmi = spk.get(middle);
 			for (int i = 0; i < middle; i++) {
 				Complex ci = spk.get(i);
 				spk.put(i, cmi);
-				cmi = spk.get(middle+i+1);
-				spk.put(middle+i+1, ci);
-				
+				cmi = spk.get(middle + i + 1);
+				spk.put(middle + i + 1, ci);
+
 			}
 			spk.put(middle, cmi);
 		}
-		
+
 		return spk;
 	}
-	
 
 	/**
 	 * Creates in place the Hermitian spectrum of spk
 	 *
-	 * @param spk a spectrum
+	 * @param spk
+	 *            a spectrum
 	 * @return transformed spk to facilitate algorithms pipelining
 	 */
-	public ComplexArray make_hermitian(ComplexArray spk, boolean realSpectrum){
-		int middle = spk.length()/2 + 1;
-		for (int i = 1;i< middle; i++){
+	public ComplexArray make_hermitian(ComplexArray spk, boolean realSpectrum) {
+		int middle = spk.length() / 2 + 1;
+		for (int i = 1; i < middle; i++) {
 			spk.put(i, spk.get(spk.length() - i));
 		}
 		if (!realSpectrum)
@@ -111,22 +114,20 @@ public class BaseAlgorithms {
 		spk.map(c -> new Complex(0.0d, 0.0d), last, spk.length());
 		return spk;
 	}
-	
 
-	public ComplexArray multiply(ComplexArray a1, ComplexArray a2){
-		a1.combine((c, c2) -> c.multiply(c2), a2 );
+	public ComplexArray multiply(ComplexArray a1, ComplexArray a2) {
+		a1.combine((c, c2) -> c.multiply(c2), a2);
 		return a1;
 	}
-	
-	public double meanAbs(ComplexArray a1, int first, int last){
+
+	public double meanAbs(ComplexArray a1, int first, int last) {
 		int N = last - first;
-		return a1.reduce((c, mean) -> ((c.abs()/N) + mean), 0d, first , last);
+		return a1.reduce((c, mean) -> ((c.abs() / N) + mean), 0d, first, last);
 	}
-	
+
 	public ComplexArray convolve(ComplexArray array, ComplexArray filter) {
 		return ifft(multiply(fft(array), fft(filter)));
 	}
-	
 
 	/**
 	 * Computes an in place fft on a complex spectrum
@@ -144,7 +145,7 @@ public class BaseAlgorithms {
 		transform.complexInverse(spk.getData(), true);
 		return spk;
 	}
-	
+
 	/**
 	 * Computes an in place fft on a complex spectrum
 	 *
@@ -162,8 +163,6 @@ public class BaseAlgorithms {
 		return spk;
 	}
 
-	
-	
 	/**
 	 * Computes opd basis
 	 * 
@@ -179,7 +178,6 @@ public class BaseAlgorithms {
 		}
 		return data;
 	}
-
 
 	// Keep to memoized the FFT plan
 	private DoubleFFT_1D transform;

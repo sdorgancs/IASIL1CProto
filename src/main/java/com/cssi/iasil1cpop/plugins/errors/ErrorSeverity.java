@@ -5,15 +5,11 @@
  */
 package com.cssi.iasil1cpop.plugins.errors;
 
-
 /**
  *
  * @author sdorgan
  */
 public enum ErrorSeverity {
-	NO_ERROR,
-    WARNING,
-    ERROR,
-    CRITICAL
-    
+	NO_ERROR, WARNING, ERROR, CRITICAL
+
 }

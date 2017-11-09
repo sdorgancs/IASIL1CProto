@@ -10,9 +10,5 @@ package com.cssi.pdap.dpi.plugins;
  * @author sdorgan
  */
 public enum DataProgressStatus {
-    NONE,
-    INITIALIZED,
-    IN_PROGRESS,
-    IN_ERROR,
-    FINISHED,
+	NONE, INITIALIZED, IN_PROGRESS, IN_ERROR, FINISHED,
 }

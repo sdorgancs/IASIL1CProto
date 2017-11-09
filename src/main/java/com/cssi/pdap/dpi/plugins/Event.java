@@ -11,9 +11,8 @@ import java.util.AbstractMap;
  *
  * @author sdorgan
  */
-public class Event implements ILogEvent{
-	@SuppressWarnings("rawtypes")
-	public Event(String codeId, AbstractMap.SimpleEntry... properties){
-        //
-    }
+public class Event implements ILogEvent {
+	public Event(String codeId, @SuppressWarnings("rawtypes") AbstractMap.SimpleEntry... properties) {
+		//
+	}
 }

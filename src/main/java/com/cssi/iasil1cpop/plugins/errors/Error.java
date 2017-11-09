@@ -9,11 +9,12 @@ package com.cssi.iasil1cpop.plugins.errors;
  *
  * @author sdorgan
  */
-public class Error{
-    ErrorSeverity criticity;
-    String description;
-    public Error(ErrorSeverity criticity, String description){
-        
-    }
-    
+public class Error {
+	ErrorSeverity criticity;
+	String description;
+
+	public Error(ErrorSeverity criticity, String description) {
+
+	}
+
 }

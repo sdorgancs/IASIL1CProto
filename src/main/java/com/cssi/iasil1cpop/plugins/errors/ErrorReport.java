@@ -26,8 +26,10 @@ public class ErrorReport {
 	public List<Error> errors() {
 		return errors;
 	}
+
 	/**
 	 * Computes the aggregated severity
+	 * 
 	 * @return the aggregated severity
 	 */
 	public ErrorSeverity severity() {
@@ -55,8 +57,8 @@ public class ErrorReport {
 			return ErrorSeverity.WARNING;
 		return ErrorSeverity.NO_ERROR;
 	}
-	
-	public ErrorReport duplicate(){
+
+	public ErrorReport duplicate() {
 		ErrorReport er = new ErrorReport();
 		Collections.copy(this.errors, er.errors);
 		return er;

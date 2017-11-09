@@ -10,5 +10,5 @@ package com.cssi.pdap.dpi.plugins;
  * @author sdorgan
  */
 public interface Fields {
-    
+
 }

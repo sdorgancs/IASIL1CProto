@@ -17,15 +17,14 @@ public class TupleReader {
 	public void setTuple(ITupleApi tuple) {
 		this.tuple = tuple;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public <Obj> Obj read(String fieldname, Obj defaultValue){
-		try{
+	public <Obj> Obj read(String fieldname, Obj defaultValue) {
+		try {
 			return (Obj) tuple.getValueByField(fieldname);
-		}catch(final Throwable t){
+		} catch (final Throwable t) {
 			return defaultValue;
 		}
-		
-		
+
 	}
 }

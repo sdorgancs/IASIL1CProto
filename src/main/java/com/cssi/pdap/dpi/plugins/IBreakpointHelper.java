@@ -12,5 +12,5 @@ package com.cssi.pdap.dpi.plugins;
 public interface IBreakpointHelper {
 
 	void emit(String bpName, ITupleApi t);
-    
+
 }

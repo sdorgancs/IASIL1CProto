@@ -9,12 +9,13 @@ package com.cssi.iasil1cpop.plugins.errors;
  *
  * @author sdorgan
  */
-public class DataIntegrityError extends DataMissingError{
-    String fieldIndentifier;
+public class DataIntegrityError extends DataMissingError {
+	String fieldIndentifier;
 
-    public DataIntegrityError(ErrorSeverity criticity, String description, String productIdentifier, String fieldIdentifier) {
-        super(criticity, description, productIdentifier);
-        this.fieldIndentifier = fieldIdentifier;
-    }
-    
+	public DataIntegrityError(ErrorSeverity criticity, String description, String productIdentifier,
+			String fieldIdentifier) {
+		super(criticity, description, productIdentifier);
+		this.fieldIndentifier = fieldIdentifier;
+	}
+
 }

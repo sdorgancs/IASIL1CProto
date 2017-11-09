@@ -30,95 +30,99 @@ import com.cssi.pdap.dpi.plugins.TupleApiImpl;
 
 /**
  * Helper class to simplify scientific algorithms integration as a DPI plugin
+ * 
  * @author sdorgan
  * @param <Input>
  * @param <Output>
  */
-public abstract class FunctionPlugin<Input, Output, Algo extends Algorithm<Input, Output> > implements IFunctionPlugin {
+public abstract class FunctionPlugin<Input, Output, Algo extends Algorithm<Input, Output>> implements IFunctionPlugin {
 	// DPI services entry point
 	private IPluginConfig dpiContext;
 	private TupleAdaptor tupleAdaptor;
-	
+
 	/**
 	 * 
 	 * @param input
 	 * @return
 	 */
 	public abstract CheckedValue<Input> readAndCheckInputs(ITupleApi input);
-	
+
 	public abstract Algo getAlgorithm();
-	
-	public abstract  List<CheckedValue<Object>> checkOutputs(Output ouput, ErrorReport error);
-	
-	
+
+	public abstract List<CheckedValue<Object>> checkOutputs(Output ouput, ErrorReport error);
+
 	/**
 	 * Generic implementation of the IFunctionPlugin.execute method
-	 * @param input a tuple transmitted by the DPI
-	 * @param a list of output tuples created by <code>Algo</code> from the input tuple associated with their error report
+	 * 
+	 * @param input
+	 *            a tuple transmitted by the DPI
+	 * @param a
+	 *            list of output tuples created by <code>Algo</code> from the
+	 *            input tuple associated with their error report
 	 */
 	@Override
-    public LinkedList<Pair<IDataFlowEvent, ITupleApi>> execute(ITupleApi input) {
-		//initialize output data
+	public LinkedList<Pair<IDataFlowEvent, ITupleApi>> execute(ITupleApi input) {
+		// initialize output data
 		LinkedList<Pair<IDataFlowEvent, ITupleApi>> list = new LinkedList<>();
-		
-		//Read input and error report
+
+		// Read input and error report
 		CheckedValue<Input> p = readAndCheckInputs(input);
 		Input in = p.getValue();
 		ErrorSeverity severity = p.getReport().severity();
 		final IDataFlowEvent event = p.getReport().createEvent(in);
-		
-		//If the input parameter cannot be created or severity is critical the tuple is skipped
-		if (in == null || severity == ErrorSeverity.CRITICAL){
+
+		// If the input parameter cannot be created or severity is critical the
+		// tuple is skipped
+		if (in == null || severity == ErrorSeverity.CRITICAL) {
 			list.add(new Pair<>(event, new TupleApiImpl()));
 			return list;
 		}
 		try {
-			//Call algorithm
+			// Call algorithm
 			Output out = getAlgorithm().call(p.getValue());
-        
-        	//Convert output into tuples
-           List<CheckedValue<Object>> outputs = checkOutputs(out, p.getReport().duplicate());
-            
-            //associate the error report to each tuple
-           outputs.forEach(cv -> {
-                IDataFlowEvent e = cv.getReport().createEvent(cv.getValue());
+
+			// Convert output into tuples
+			List<CheckedValue<Object>> outputs = checkOutputs(out, p.getReport().duplicate());
+
+			// associate the error report to each tuple
+			outputs.forEach(cv -> {
+				IDataFlowEvent e = cv.getReport().createEvent(cv.getValue());
 				Pair<String, ITupleApi> t;
-				
+
 				try {
-					
+
 					t = tupleAdaptor.createTuple(out, cv.getValue());
 					list.add(new Pair<>(e, t.getValue()));
-	                getBreakpointHelper().emit(t.getKey(), t.getValue());
-	                
+					getBreakpointHelper().emit(t.getKey(), t.getValue());
+
 				} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException ex) {
-					//If an unforeseen exception occurs
-		        	//A log message is sent to the DPI
-		            getILoggerHelper().emit(new Event("exception", 
-		                    new AbstractMap.SimpleEntry<>("exception", ex.getClass().getName()),
-		                    new AbstractMap.SimpleEntry<>("message", ex.getMessage())
-		            ));
-		            //A report is associated to an empty tuple
-		            list.add(new Pair<>(event, new TupleApiImpl()));
+					// If an unforeseen exception occurs
+					// A log message is sent to the DPI
+					getILoggerHelper().emit(
+							new Event("exception", new AbstractMap.SimpleEntry<>("exception", ex.getClass().getName()),
+									new AbstractMap.SimpleEntry<>("message", ex.getMessage())));
+					// A report is associated to an empty tuple
+					list.add(new Pair<>(event, new TupleApiImpl()));
 				}
-				
-            });
-        } catch (Exception ex) {
-        	//If an unforeseen exception occurs
-        	//A log message is sent to the DPI
-            getILoggerHelper().emit(new Event("exception", 
-                    new AbstractMap.SimpleEntry<>("exception", ex.getClass().getName()),
-                    new AbstractMap.SimpleEntry<>("message", ex.getMessage())
-            ));
-            //A report is associated to an empty tuple
-            list.add(new Pair<>(event, new TupleApiImpl()));
-        }
-        return list;
-    }
-	
+
+			});
+		} catch (Exception ex) {
+			// If an unforeseen exception occurs
+			// A log message is sent to the DPI
+			getILoggerHelper()
+					.emit(new Event("exception", new AbstractMap.SimpleEntry<>("exception", ex.getClass().getName()),
+							new AbstractMap.SimpleEntry<>("message", ex.getMessage())));
+			// A report is associated to an empty tuple
+			list.add(new Pair<>(event, new TupleApiImpl()));
+		}
+		return list;
+	}
+
 	/**
 	 * Store <code>init</code> parameter
 	 * 
-	 * @param init DPI interfaces entry point
+	 * @param init
+	 *            DPI interfaces entry point
 	 */
 	@Override
 	public void init(IPluginConfig init) {
@@ -130,8 +134,6 @@ public abstract class FunctionPlugin<Input, Output, Algo extends Algorithm<Input
 	public void close() {
 		// Nothing to do
 	}
-
-	
 
 	/**
 	 * Delegates call to <code>dpiContext</code>

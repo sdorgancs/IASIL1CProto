@@ -18,7 +18,6 @@ import com.cssi.iasil1cpop.algorithms.utils.ComplexArray;
  */
 public class IASIL1CFourierTransformTests {
 
-
 	@Test
 	public void TestExtractScienceSignal() {
 		IASIL1CFourierTransform algo = new IASIL1CFourierTransform();
@@ -45,22 +44,20 @@ public class IASIL1CFourierTransformTests {
 		Assert.assertArrayEquals(expectedSym.getData(), science.getData(), 10E-10);
 	}
 
-
-
-//	@Test
-//	public void TestOpd() {
-//		IASIL1CFourierTransform algo = new IASIL1CFourierTransform();
-//		int nfft = 8;
-//		ComplexArray spk = new ComplexArray(nfft);
-//		for (int i = 0; i < nfft; i++) {
-//			spk.put(i, new Complex(0.0d, i + 1));
-//		}
-//		double[] basis = algo.opd(nfft, 2d);
-//
-//		double[] expected = { -8.0, -6.0, -4.0, -2.0, 0.0, 2.0, 4.0, 6.0 };
-//
-//		Assert.assertArrayEquals(expected, basis, 10E-10);
-//	}
+	// @Test
+	// public void TestOpd() {
+	// IASIL1CFourierTransform algo = new IASIL1CFourierTransform();
+	// int nfft = 8;
+	// ComplexArray spk = new ComplexArray(nfft);
+	// for (int i = 0; i < nfft; i++) {
+	// spk.put(i, new Complex(0.0d, i + 1));
+	// }
+	// double[] basis = algo.opd(nfft, 2d);
+	//
+	// double[] expected = { -8.0, -6.0, -4.0, -2.0, 0.0, 2.0, 4.0, 6.0 };
+	//
+	// Assert.assertArrayEquals(expected, basis, 10E-10);
+	// }
 
 	@Test
 	public void TestCall() {
